@@ -217,9 +217,11 @@ TEST(SmacTest, test_smac_lattice_reconfigure)
   parameters.clear();
 
   parameters.push_back(rclcpp::Parameter("test.coarse_search_resolution", 4));
-  parameters.push_back(rclcpp::Parameter("test.lattice_filepath",
-    ament_index_cpp::get_package_share_directory("nav2_smac_planner") +
-    "/sample_primitives/test/output.json"));
+  parameters.push_back(
+    rclcpp::Parameter(
+      "test.lattice_filepath",
+      ament_index_cpp::get_package_share_directory("nav2_smac_planner") +
+      "/sample_primitives/test/output.json"));
   EXPECT_NO_THROW(planner->callDynamicParams(parameters));
   EXPECT_EQ(planner->getCoarseSearchResolution(), 1);
 

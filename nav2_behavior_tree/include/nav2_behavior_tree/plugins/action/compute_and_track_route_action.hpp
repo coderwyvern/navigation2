@@ -92,7 +92,8 @@ public:
           "Whether to use the start pose or the robot's current pose"),
         BT::InputPort<bool>(
           "use_poses", false, "Whether to use poses or IDs for start and goal"),
-        BT::OutputPort<builtin_interfaces::msg::Duration>("execution_duration",
+        BT::OutputPort<builtin_interfaces::msg::Duration>(
+          "execution_duration",
           "Time taken to compute and track route"),
         BT::OutputPort<ActionResult::_error_code_type>(
           "error_code_id", "The compute route error code"),

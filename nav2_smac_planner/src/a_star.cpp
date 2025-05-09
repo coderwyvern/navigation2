@@ -231,8 +231,9 @@ void AStarAlgorithm<NodeT>::setGoal(
     case GoalHeadingMode::DEFAULT: {
         // add a single goal node with single heading
         auto goal = addToGraph(NodeT::getIndex(mx, my, dim_3));
-        goal->setPose(typename NodeT::Coordinates(
-          static_cast<int>(mx), static_cast<int>(my), static_cast<int>(dim_3)));
+        goal->setPose(
+          typename NodeT::Coordinates(
+            static_cast<int>(mx), static_cast<int>(my), static_cast<int>(dim_3)));
         goals_state.push_back({goal, true});
         break;
       }
@@ -241,15 +242,17 @@ void AStarAlgorithm<NodeT>::setGoal(
         // Add two goals, one for each direction
         // add goal in original direction
         auto goal = addToGraph(NodeT::getIndex(mx, my, dim_3));
-        goal->setPose(typename NodeT::Coordinates(
-          static_cast<int>(mx), static_cast<int>(my), static_cast<int>(dim_3)));
+        goal->setPose(
+          typename NodeT::Coordinates(
+            static_cast<int>(mx), static_cast<int>(my), static_cast<int>(dim_3)));
         goals_state.push_back({goal, true});
 
         // Add goal node in opposite (180°) direction
         unsigned int opposite_heading = (dim_3 + (num_bins / 2)) % num_bins;
         auto opposite_goal = addToGraph(NodeT::getIndex(mx, my, opposite_heading));
-        opposite_goal->setPose(typename NodeT::Coordinates(
-          static_cast<int>(mx), static_cast<int>(my), static_cast<int>(opposite_heading)));
+        opposite_goal->setPose(
+          typename NodeT::Coordinates(
+            static_cast<int>(mx), static_cast<int>(my), static_cast<int>(opposite_heading)));
         goals_state.push_back({opposite_goal, true});
         break;
       }
@@ -261,8 +264,9 @@ void AStarAlgorithm<NodeT>::setGoal(
         // Add goal nodes for all headings
         for (unsigned int i = 0; i < num_bins; ++i) {
           auto goal = addToGraph(NodeT::getIndex(mx, my, i));
-          goal->setPose(typename NodeT::Coordinates(
-            static_cast<float>(mx), static_cast<float>(my), static_cast<float>(i)));
+          goal->setPose(
+            typename NodeT::Coordinates(
+              static_cast<float>(mx), static_cast<float>(my), static_cast<float>(i)));
           goals_state.push_back({goal, true});
         }
         break;
@@ -341,7 +345,8 @@ bool AStarAlgorithm<NodeT>::createPath(
   }
 
   NodeVector coarse_check_goals, fine_check_goals;
-  _goal_manager.prepareGoalsForAnalyticExpansion(coarse_check_goals, fine_check_goals,
+  _goal_manager.prepareGoalsForAnalyticExpansion(
+    coarse_check_goals, fine_check_goals,
     _coarse_search_resolution);
 
   // 0) Add starting point to the open set

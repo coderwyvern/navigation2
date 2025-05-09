@@ -437,7 +437,8 @@ nav_msgs::msg::Path SmacPlannerHybrid::createPlan(
   if (orientation_bin >= static_cast<float>(_angle_quantizations)) {
     orientation_bin -= static_cast<float>(_angle_quantizations);
   }
-  _a_star->setGoal(mx_goal, my_goal, static_cast<unsigned int>(orientation_bin),
+  _a_star->setGoal(
+    mx_goal, my_goal, static_cast<unsigned int>(orientation_bin),
     _goal_heading_mode, _coarse_search_resolution);
 
   // Setup message
@@ -720,8 +721,8 @@ SmacPlannerHybrid::dynamicParametersCallback(std::vector<rclcpp::Parameter> para
         if (_angle_quantizations % _coarse_search_resolution != 0) {
           RCLCPP_WARN(
             _logger,
-              "coarse iteration should be an increment of the "
-              "number of angular bins configured. Disabling course research!"
+            "coarse iteration should be an increment of the "
+            "number of angular bins configured. Disabling course research!"
           );
           _coarse_search_resolution = 1;
         }

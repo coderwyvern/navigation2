@@ -47,9 +47,9 @@ public:
   typedef typename NodeT::Coordinates Coordinates;
   typedef typename NodeT::CoordinateVector CoordinateVector;
 
-   /**
-   * @brief Constructor: Initializes empty goal state. sets and coordinate lists.
-   */
+  /**
+  * @brief Constructor: Initializes empty goal state. sets and coordinate lists.
+  */
   GoalManager()
   : _goals_set(NodeSet()),
     _goals_state(GoalStateVector()),

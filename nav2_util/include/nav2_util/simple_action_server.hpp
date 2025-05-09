@@ -593,8 +593,9 @@ protected:
     if constexpr (has_error_code<typename ActionT::Result>::value &&
       has_error_msg<typename ActionT::Result>::value)
     {
-      warn_msg("Aborting handle. error_code:" + std::to_string(result->error_code) +
-             ", error_msg:'" + result->error_msg + "'.");
+      warn_msg(
+        "Aborting handle. error_code:" + std::to_string(result->error_code) +
+        ", error_msg:'" + result->error_msg + "'.");
     } else if constexpr (has_error_code<typename ActionT::Result>::value) {
       warn_msg("Aborting handle. error_code:" + std::to_string(result->error_code) + ".");
     } else {

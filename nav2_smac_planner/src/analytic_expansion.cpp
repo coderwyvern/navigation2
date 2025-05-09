@@ -316,14 +316,14 @@ float AnalyticExpansion<NodeT>::refineAnalyticPath(
 
       float score = 0.0;
       float normalized_cost = 0.0;
-    // Analytic expansions are consistently spaced
+      // Analytic expansions are consistently spaced
       const float distance = hypotf(
-      expansion[1].proposed_coords.x - expansion[0].proposed_coords.x,
-      expansion[1].proposed_coords.y - expansion[0].proposed_coords.y);
+        expansion[1].proposed_coords.x - expansion[0].proposed_coords.x,
+        expansion[1].proposed_coords.y - expansion[0].proposed_coords.y);
       const float & weight = expansion[0].node->motion_table.cost_penalty;
       for (auto iter = expansion.begin(); iter != expansion.end(); ++iter) {
         normalized_cost = iter->node->getCost() / 252.0f;
-      // Search's Traversal Cost Function
+        // Search's Traversal Cost Function
         score += distance * (1.0 + weight * normalized_cost);
       }
       return score;
