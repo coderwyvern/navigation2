@@ -58,17 +58,17 @@ void CostCritic::initialize()
 
   if (costmap_ros_->getUseRadius() == consider_footprint_) {
     RCLCPP_WARN(
-      logger_,
-      "Inconsistent configuration in collision checking. Please verify the robot's shape settings "
-      "in both the costmap and the cost critic.");
+    logger_,
+    "Inconsistent configuration in collision checking. Please verify the robot's shape settings "
+    "in both the costmap and the cost critic.");
     if (costmap_ros_->getUseRadius()) {
       throw nav2_core::ControllerException(
-              "Considering footprint in collision checking but no robot footprint provided in the "
-              "costmap.");
+      "Considering footprint in collision checking but no robot footprint provided in the "
+      "costmap.");
     }
   }
 
-  if (near_collision_cost_ > 253) {
+  if(near_collision_cost_ > 253) {
     RCLCPP_WARN(logger_, "Near collision cost is set higher than INSCRIBED_INFLATED_OBSTACLE");
   }
 
