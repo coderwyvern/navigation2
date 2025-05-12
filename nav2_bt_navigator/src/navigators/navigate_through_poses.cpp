@@ -61,8 +61,8 @@ NavigateThroughPosesNavigator::configure(
   }
 
   bt_action_server_->setGrootMonitoring(
-    node->get_parameter(getName() + ".enable_groot_monitoring").as_bool(),
-    node->get_parameter(getName() + ".groot_server_port").as_int());
+      node->get_parameter(getName() + ".enable_groot_monitoring").as_bool(),
+      node->get_parameter(getName() + ".groot_server_port").as_int());
 
   return true;
 }
@@ -308,13 +308,12 @@ NavigateThroughPosesNavigator::initializeGoalPoses(ActionT::Goal::ConstSharedPtr
 
   // Reset the waypoint states vector in the blackboard
   std::vector<nav2_msgs::msg::WaypointStatus> waypoint_statuses(goals_array.goals.size());
-  for (size_t waypoint_index = 0; waypoint_index < goals_array.goals.size(); ++waypoint_index) {
+  for (size_t waypoint_index = 0 ; waypoint_index < goals_array.goals.size() ; ++waypoint_index) {
     waypoint_statuses[waypoint_index].waypoint_index = waypoint_index;
     waypoint_statuses[waypoint_index].waypoint_pose = goals_array.goals[waypoint_index];
   }
-  blackboard->set<decltype(waypoint_statuses)>(
-    waypoint_statuses_blackboard_id_,
-    std::move(waypoint_statuses));
+  blackboard->set<decltype(waypoint_statuses)>(waypoint_statuses_blackboard_id_,
+      std::move(waypoint_statuses));
 
   return true;
 }

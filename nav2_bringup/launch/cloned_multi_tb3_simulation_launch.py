@@ -45,6 +45,7 @@ def generate_robot_actions(context, *args, **kwargs):
     autostart = LaunchConfiguration('autostart')
     rviz_config_file = LaunchConfiguration('rviz_config')
     map_yaml_file = LaunchConfiguration('map')
+    graph_filepath = LaunchConfiguration('graph')
     use_robot_state_pub = LaunchConfiguration('use_robot_state_pub')
 
     robots_substitution = ParseMultiRobotPose(LaunchConfiguration('robots'))
@@ -76,6 +77,7 @@ def generate_robot_actions(context, *args, **kwargs):
                     launch_arguments={
                         'namespace': robot_name,
                         'map': map_yaml_file,
+                        'graph': graph_filepath,
                         'use_sim_time': 'True',
                         'params_file': params_file,
                         'autostart': autostart,
@@ -100,7 +102,7 @@ def generate_robot_actions(context, *args, **kwargs):
     return bringup_cmd_group
 
 
-def generate_launch_description():
+def generate_launch_description() -> LaunchDescription:
     """
     Bring up the multi-robots with given launch arguments.
 
@@ -143,6 +145,11 @@ def generate_launch_description():
         'map',
         default_value=os.path.join(bringup_dir, 'maps', 'tb3_sandbox.yaml'),
         description='Full path to map file to load',
+    )
+
+    declare_graph_file_cmd = DeclareLaunchArgument(
+        'graph',
+        default_value=os.path.join(bringup_dir, 'graphs', 'turtlebot3_graph.geojson'),
     )
 
     declare_params_file_cmd = DeclareLaunchArgument(
@@ -205,6 +212,7 @@ def generate_launch_description():
     ld.add_action(declare_world_cmd)
     ld.add_action(declare_robots_cmd)
     ld.add_action(declare_map_yaml_cmd)
+    ld.add_action(declare_graph_file_cmd)
     ld.add_action(declare_params_file_cmd)
     ld.add_action(declare_use_rviz_cmd)
     ld.add_action(declare_autostart_cmd)
