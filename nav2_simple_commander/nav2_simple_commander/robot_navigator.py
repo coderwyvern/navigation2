@@ -38,8 +38,6 @@ from rclpy.action.client import ClientGoalHandle
 from rclpy.duration import Duration as rclpyDuration
 from rclpy.node import Node
 from rclpy.qos import QoSDurabilityPolicy, QoSHistoryPolicy, QoSProfile, QoSReliabilityPolicy
-from rclpy.task import Future
-from rclpy.type_support import GetResultServiceResponse
 
 
 # Task Result enum for the result of the task being executed
@@ -75,10 +73,8 @@ class BasicNavigator(Node):
         super().__init__(node_name=node_name, namespace=namespace)
         self.initial_pose = PoseStamped()
         self.initial_pose.header.frame_id = 'map'
-
         self.goal_handle: Optional[ClientGoalHandle[Any, Any, Any]] = None
-        self.result_future: \
-            Optional[Future[GetResultServiceResponse[Any]]] = None
+        self.result_future = None
         self.feedback: Any = None
         self.status: Optional[int] = None
 
@@ -87,8 +83,7 @@ class BasicNavigator(Node):
         # we must track its futures and feedback separately. Additionally, the
         # route tracking feedback is uniquely important to be complete and ordered
         self.route_goal_handle: Optional[ClientGoalHandle[Any, Any, Any]] = None
-        self.route_result_future: \
-            Optional[Future[GetResultServiceResponse[Any]]] = None
+        self.route_result_future = None
         self.route_feedback: list[Any] = []
 
         # Error code and messages from servers
